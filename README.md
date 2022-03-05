@@ -3,7 +3,7 @@
 A Flutter Project for Simple to do list app
 you cane make any crud process on saved data create, read data, update and delete 
 
-sing BottomNavigationBar for easy use the app
+using BottomNavigationBar for easy use the app
 
 # Blugins
 - sqflite for save database
