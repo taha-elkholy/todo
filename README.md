@@ -5,7 +5,7 @@ you cane make any crud process on saved data create, read data, update and delet
 
 using BottomNavigationBar for easy use the app
 
-# Blugins
+# Plugins
 - sqflite for save database
 - shared_preferences for cached data
 - intl for date formate
