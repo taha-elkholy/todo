@@ -1,16 +1,15 @@
 # todo
 
-A new Flutter project with local database
+A Flutter Project for Simple to do list app
+you cane make any crud process on saved data create, read data, update and delete 
 
-## Getting Started
+sing BottomNavigationBar for easy use the app
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Blugins
+- sqflite for save database
+- shared_preferences for cached data
+- intl for date formate
+- flutter_bloc for state management
+- bloc for observ the code when debug
+- conditional_builder_null_safety for build widgets related to a condetion
+- hexcolor for use colors in the Hex type
