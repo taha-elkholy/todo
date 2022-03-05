@@ -5,14 +5,14 @@ import 'package:todo/shared/components/components.dart';
 import 'package:todo/shared/cubit/app_cubit.dart';
 import 'package:todo/shared/cubit/app_states.dart';
 
-class NewTasksScreen extends StatelessWidget {
-  const NewTasksScreen({Key? key}) : super(key: key);
+class ArchivedTasksScreen extends StatelessWidget {
+  const ArchivedTasksScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
       builder: (context, state) {
-        var tasks = AppCubit.get(context).newTasks;
+        var tasks = AppCubit.get(context).archivedTasks;
         return ConditionalBuilder(
             condition: tasks.length > 0,
             builder: (context) {

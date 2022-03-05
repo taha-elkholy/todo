@@ -11,32 +11,31 @@ class DoneTasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-        builder: (context, state) {
-          var tasks = AppCubit
-              .get(context)
-              .doneTasks;
-          return ConditionalBuilder(
-              condition: tasks.length > 0,
-              builder: (context) {
-                return ListView.separated(
-                    itemBuilder: (context, index) {
-                      return buildTaskItem(context, tasks[index]);
-                    },
-                    separatorBuilder: (context, index) {
-                      return Container(
-                        color: Colors.grey[300],
-                        width: double.infinity,
-                        height: 1,
-                      );
-                    },
-                    itemCount: tasks.length);
-              },
-              fallback: (context) {
-                return Center(
-                  child: Text('No Tasks Yet'),
-                );
-              });
-        },
-        listener: (context, state) {});
+      builder: (context, state) {
+        var tasks = AppCubit.get(context).doneTasks;
+        return ConditionalBuilder(
+            condition: tasks.length > 0,
+            builder: (context) {
+              return ListView.separated(
+                  itemBuilder: (context, index) {
+                    return buildTaskItem(context, tasks[index]);
+                  },
+                  separatorBuilder: (context, index) {
+                    return Container(
+                      color: Colors.grey[300],
+                      width: double.infinity,
+                      height: 1,
+                    );
+                  },
+                  itemCount: tasks.length);
+            },
+            fallback: (context) {
+              return Center(
+                child: Text('No Tasks Yet'),
+              );
+            });
+      },
+      listener: (context, state) {},
+    );
   }
 }

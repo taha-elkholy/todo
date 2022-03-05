@@ -28,9 +28,7 @@ class Home extends StatelessWidget {
     //AppCubit cubit = AppCubit.get(context);
     return BlocProvider(
       // AppCubit()..createDatabase() for create database first thing
-      create: (context) =>
-      AppCubit()
-        ..createDatabase(),
+      create: (context) => AppCubit()..createDatabase(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
           if (state is AppInsertIntoDatabaseState) {
@@ -63,106 +61,109 @@ class Home extends StatelessWidget {
                   scaffoldKey.currentState!
                       .showBottomSheet(
                         (context) {
-                      return Container(
-                        width: double.infinity,
-                        child: Form(
-                          key: formKey,
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  'Add New Task',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                defaultTextFormField(
-                                    controller: titleController,
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Title is required';
-                                      }
-                                    },
-                                    inputType: TextInputType.text,
-                                    label: 'Task Title',
-                                    prefix: Icons.text_fields),
-                                //defaultTextFormField
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                defaultTextFormField(
-                                    controller: timeController,
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Time is required';
-                                      }
-                                    },
-                                    inputType: TextInputType.datetime,
-                                    label: 'Task Time',
-                                    prefix: Icons.watch_later_outlined,
-                                    onTap: () {
-                                      showTimePicker(
-                                          context: context,
-                                          initialTime: TimeOfDay.now())
-                                          .then((value) {
-                                        cubit.setTime(
+                          return Container(
+                            width: double.infinity,
+                            child: Form(
+                              key: formKey,
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'Add New Task',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    defaultTextFormField(
+                                        controller: titleController,
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Title is required';
+                                          }
+                                          return null;
+                                        },
+                                        inputType: TextInputType.text,
+                                        label: 'Task Title',
+                                        prefix: Icons.text_fields),
+                                    //defaultTextFormField
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    defaultTextFormField(
+                                        controller: timeController,
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Time is required';
+                                          }
+                                          return null;
+                                        },
+                                        inputType: TextInputType.datetime,
+                                        label: 'Task Time',
+                                        prefix: Icons.watch_later_outlined,
+                                        onTap: () {
+                                          showTimePicker(
+                                                  context: context,
+                                                  initialTime: TimeOfDay.now())
+                                              .then((value) {
+                                            cubit.setTime(
+                                                context: context,
+                                                timeOfDay: value);
+                                            timeController.text = cubit.time;
+                                          });
+                                        }),
+                                    //defaultTextFormField
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    defaultTextFormField(
+                                        controller: dateController,
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Date is required';
+                                          }
+                                          return null;
+                                        },
+                                        inputType: TextInputType.datetime,
+                                        label: 'Task Date',
+                                        prefix: Icons.calendar_today_outlined,
+                                        onTap: () {
+                                          showDatePicker(
                                             context: context,
-                                            timeOfDay: value);
-                                        timeController.text = cubit.time;
-                                      });
-                                    }),
-                                //defaultTextFormField
-                                SizedBox(
-                                  height: 20,
+                                            initialDate: DateTime.now(),
+                                            firstDate: DateTime.now(),
+                                            lastDate: DateTime.now()
+                                                .add(Duration(days: 365)),
+                                          ).then((value) {
+                                            cubit.setDate(value: value);
+                                            dateController.text = cubit.date;
+                                          });
+                                        }),
+                                    //defaultTextFormField
+                                  ],
                                 ),
-                                defaultTextFormField(
-                                    controller: dateController,
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Date is required';
-                                      }
-                                    },
-                                    inputType: TextInputType.datetime,
-                                    label: 'Task Date',
-                                    prefix: Icons.calendar_today_outlined,
-                                    onTap: () {
-                                      showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime.now(),
-                                        lastDate: DateTime.now()
-                                            .add(Duration(days: 365)),
-                                      ).then((value) {
-                                        cubit.setDate(value: value);
-                                        dateController.text = cubit.date;
-                                      });
-                                    }),
-                                //defaultTextFormField
-                              ],
+                              ),
                             ),
-                          ),
+                          );
+                        },
+                        elevation: 25,
+                        backgroundColor: Colors.grey[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
-                      );
-                    },
-                    elevation: 25,
-                    backgroundColor: Colors.grey[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ) // BottomSheet
+                      ) // BottomSheet
                       .closed
                       .then((value) {
-                    // when close the bottom sheet
-                    // change the state of bottom sheet from open to closed
-                    cubit.changeBottomSheetState(
-                        isBottomSheetShown: false, fabIcon: Icons.edit);
-                  });
+                        // when close the bottom sheet
+                        // change the state of bottom sheet from open to closed
+                        cubit.changeBottomSheetState(
+                            isBottomSheetShown: false, fabIcon: Icons.edit);
+                      });
 
                   // change the state of bottom sheet from closed to open
                   cubit.changeBottomSheetState(
@@ -172,8 +173,7 @@ class Home extends StatelessWidget {
             ),
             body: ConditionalBuilder(
                 condition: state is AppGetDatabaseLoadingState,
-                builder: (context) =>
-                    Center(
+                builder: (context) => Center(
                       child: CircularProgressIndicator(),
                     ),
                 fallback: (context) => cubit.screens[cubit.currentIndex]),
